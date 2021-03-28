@@ -1,0 +1,11 @@
+FROM node:current-alpine as server
+
+WORKDIR /usr/server
+RUN npm install -g @nestjs/cli
+COPY ./package*.json ./
+COPY ./yarn.lock ./
+RUN yarn install --production
+
+COPY ./ ./
+
+CMD ["yarn", "start:dev" ]
